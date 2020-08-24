@@ -2,19 +2,25 @@
 {% block title %} Sorting Algorithm Page {% endblock %}
 
 {% block content %}
-  <main></main>
-  <div class="algorithm-form">
-    <select class="custom-select" name="sorting-algorithm" id="sorting-algorithm-selection" onchange="change_algorithm_on_select()">
-      {% for i in range(0, len) %}
-        <option value={{ i+1 }}>{{ algorithms[i] }} </option>
-      {% endfor %}
-    </select>
-  </div>
+  <main class=""></main>
+  <div class="sorting-algorithm-control card px-2 align-items-center">
+    <div class="algorithm-form">
+      <h4>Select algorithm</h4>
+      <select class="custom-select" name="sorting-algorithm" id="sorting-algorithm-selection" onchange="change_algorithm_on_select()">
+        {% for i in range(0, len) %}
+          <option value={{ i+1 }}>{{ algorithms[i] }} </option>
+        {% endfor %}
+      </select>
+    </div>
 
-  <div class="button-area">
-    <button type="button" class="btn btn-primary" id="button_play" onclick="button_play_press()">
-      <i class="fa fa-play" aria-hidden="true"></i>
-    </button>
+    <div class="button-area">
+      <button type="button" class="btn btn-primary" id="button_play" onclick="button_play_press()">
+        <i class="fa fa-play"></i>
+      </button>
+      <button type="button" class="btn btn-primary" id="button_redo" onclick="button_redo_press()">
+        <i class="fa fa-repeat"></i>
+      </button>
+    </div>
   </div>
 {% endblock %}
 

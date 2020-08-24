@@ -4,11 +4,13 @@ class SortingAlgorithm {
     this.values = values;
   }
 
+  init() {}
+
   sort() {}
+
   sort_on_frame() {}
 
   swap(a, b) {
-    // sleep(15);
     let temp = this.values[a];
     this.values[a] = this.values[b];
     this.values[b] = temp;
@@ -19,6 +21,10 @@ class BubbleSortAlgorithm extends SortingAlgorithm {
 
   constructor(values) {
     super(values);
+    this.init();
+  }
+
+  init() {
     this.swapped = true;
     this.n = this.values.length;
   }
@@ -58,9 +64,24 @@ class QuickSortAlgorithm extends SortingAlgorithm {
 
   constructor(values) {
     super(values);
+    this.init();
   }
 
-  async partition(start, end) {
+  init() {
+    this.start = 0;
+    this.end = values.length - 1;
+
+    // Creating a 'stack'
+    this.stack = Array.from(Array(this.end - this.start + 1), () => 0);
+
+    // Initializing the stack
+    this.top = 0;
+    this.stack[this.top] = this.start;
+    this.top ++;
+    this.stack[this.top] = this.end;
+  }
+
+  partition(start, end) {
     let pivot_index = start;
     let pivot_value = this.values[end];
     for (let i = start; i < end; i++) {
@@ -73,10 +94,11 @@ class QuickSortAlgorithm extends SortingAlgorithm {
     return pivot_index;
   }
 
-  async quicksort(start, end) {
+  quicksort(start, end) {
     if (start >= end) return;
-    let index = await this.partition(start, end);
-    await Promise.all([this.quicksort(start, index - 1), this.quicksort(index + 1, end)]);
+    let index = this.partition(start, end);
+    this.quicksort(start, index - 1);
+    this.quicksort(index + 1, end);
   }
 
   sort() {
@@ -85,5 +107,30 @@ class QuickSortAlgorithm extends SortingAlgorithm {
 
   sort_on_frame() {
 
+    if (this.top >= 0) {
+      this.end = this.stack[this.top];
+      this.top --;
+      this.start = this.stack[this.top];
+      this.top --;
+
+      let pivot_index = this.partition(this.start, this.end);
+
+      if (pivot_index > this.start) {
+        this.top ++;
+        this.stack[this.top] = 1;
+        this.top ++;
+        this.stack[this.top] = pivot_index - 1;
+      }
+
+      if (pivot_index + 1 < this.end) {
+        this.top ++;
+        this.stack[this.top] = pivot_index + 1;
+        this.top ++;
+        this.stack[this.top] = this.end;
+      }
+      return false;
+    } else {
+      return true;
+    }
   }
 }

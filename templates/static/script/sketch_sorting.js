@@ -2,7 +2,7 @@ let algorithm_selected = 1;
 let values = [];
 let width = 400;
 let height = 400;
-let algorithm = null;
+let algorithm = new SortingAlgorithm(values);
 let state = 'stop';
 let sorted = false;
 
@@ -11,10 +11,8 @@ function shuffle_values() {
   for (let i = 0; i < width; i++) {
     values[i] = random(height);
   }
-}
-
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
+  sorted = false;
+  algorithm.init();
 }
 
 // Init of the canvas
@@ -25,7 +23,8 @@ function setup() {
   shuffle_values();
 
   // Create algorithm
-  algorithm = new QuickSortAlgorithm(values);
+  algorithm = new BubbleSortAlgorithm(values);
+
 }
 
 // Update of the canvas
@@ -36,6 +35,7 @@ function draw() {
     line(i, height, i, height-values[i]);
   }
 
-  // if (state == 'play') sorted = algorithm.sort_on_frame();
-  algorithm.sort(0, values.length - 1);
+  if (!sorted) {
+    if (state == 'play') sorted = algorithm.sort_on_frame();
+  }
 }

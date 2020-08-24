@@ -11,6 +11,10 @@ app._static_folder = os.path.abspath("templates/static/")
 
 sorting_algorithm = ['BubbleSort', 'Quicksort']
 
+@app.route('/')
+def redirect_home():
+    return redirect(url_for('home'))
+
 @app.route('/home')
 def home():
     return render_template('layout/home.html')

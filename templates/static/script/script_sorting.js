@@ -9,9 +9,21 @@ function button_play_press() {
   }
 }
 
+function button_play_redo() {
+  let btn = document.getElementById('button_play');
+  state = 'stop';
+  btn.children[0].className = "fa fa-play";
+}
+
 function change_algorithm_on_select() {
   let selection = document.getElementById('sorting-algorithm-selection');
   algorithm_selected = parseInt(selection.options[selection.selectedIndex].value);
   if (algorithm_selected == 1) algorithm = new BubbleSortAlgorithm(values);
   if (algorithm_selected == 2) algorithm = new QuickSortAlgorithm(values);
+  button_play_redo();
+}
+
+function button_redo_press() {
+  button_play_redo();
+  shuffle_values();
 }
