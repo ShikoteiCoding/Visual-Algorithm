@@ -1,10 +1,13 @@
 {% extends "layout/base.html" %}
 {% block title %} Pathfinding Algorithm Page {% endblock %}
 {% block content %}
-  <main class=""></main>
+  <main class="canvas"></main>
 
 {% endblock %}
 
 {% block scripts %}
   <script src="https://cdn.jsdelivr.net/npm/p5@1.1.9/lib/p5.js"></script>
+  <script defer src="{{url_for('static', filename='script/pathfinding_algorithm.js')}}"></script>
+  <script defer src="{{url_for('static', filename='script/sketch_pathfinding.js')}}"></script>
+  <script defer src="{{url_for('static', filename='script/script_pathfinding.js')}}"></script>
 {% endblock %}
