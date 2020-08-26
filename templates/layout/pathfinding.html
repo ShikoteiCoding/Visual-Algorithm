@@ -3,6 +3,14 @@
 {% block content %}
   <main class="canvas"></main>
 
+  <div class="card canvas-pathfinding-control">
+    <button type="button" class="btn btn-primary pencil-btn" onclick="wall_pencil_press()">Draw walls</button>
+    <button type="button" class="btn btn-success pencil-btn" onclick="start_pencil_press()">Draw start point</button>
+    <button type="button" class="btn btn-dark pencil-btn" onclick="end_pencil_press()">Draw end point</button>
+    <button type="button" class="btn btn-light pencil-btn" onclick="clean_grid_press()">Clean the grid</button>
+    <button type="button" class="btn btn-white pencil-btn" onclick="find_path_press()">Find a path</button>
+  </div>
+
 {% endblock %}
 
 {% block scripts %}
